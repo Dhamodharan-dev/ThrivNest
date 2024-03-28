@@ -1,0 +1,19 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body{
+  background-image: linear-gradient(to right, #004200 , #000000);
+  color: #FFF3C7;
+  font-family: "Roboto Slab", serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+}
+.missing-div{
+  height: 80dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

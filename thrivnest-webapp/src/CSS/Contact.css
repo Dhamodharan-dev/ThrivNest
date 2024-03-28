@@ -1,0 +1,61 @@
+.footer{
+    width: 100%;
+    padding: 3rem 0;
+    background-color: #000000;
+    gap: 4rem;
+}
+.contact-div{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-around;
+    gap: 4rem;
+    padding: 3rem 0;
+}
+.contact-img{
+    width: 40%;
+    margin-left: 30%;
+}
+.f-h1{
+    margin-bottom: 2rem;
+    text-align: center;
+}
+.footer-box{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+}
+.footer-box>p:hover{
+    color: #FBA834;
+    cursor: pointer;
+}
+#follow-box>p{
+    transition: 0.5s;
+    font-size: 1.5rem;
+}
+#follow-box>p:hover{
+    transform: scale(2);
+    transition: 0.5s;
+}
+#insta:hover{
+    color: rgb(238, 44, 76);
+}
+#fbook:hover{
+    color: #207BF3;
+}
+#twt:hover{
+    color: #24A3F1;
+}
+#yt:hover{
+    color: rgb(252, 7, 7);
+}
+#lin:hover{
+    color: #1469C7;
+}
+@media screen and (max-width: 679px) {
+    .contact-img{
+        display: none;
+    }
+}
