@@ -102,7 +102,6 @@ function Main() {
   return (
     <div id='main'>
       <Header 
-        loggedIn={loggedIn} 
         handleLogout={handleLogout} 
       />
       <Routes>

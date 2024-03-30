@@ -4,7 +4,7 @@ import { faBars, faX } from '@fortawesome/free-solid-svg-icons';
 import '../CSS/Header.css';
 import { Link } from 'react-router-dom';
 
-function Header({ loggedIn }) {
+function Header() {
   const [hamburger, setHamburger] = useState(faBars);
   
   const handleMenu = () => {
@@ -22,8 +22,10 @@ function Header({ loggedIn }) {
     navBarId = 'closed';
   }
 
-  const isLogin = loggedIn ? '/properties' : '/login'
-
+  const isloggedin = localStorage.getItem('loggedIn')
+  const isLogin = isloggedin ? '/properties' : '/login'
+  const getUsername = localStorage.getItem('username')
+  const checkUser = getUsername !== 'admin' ? '/dashboard' : '/admin'
   return (
     <div className='header'>
       <Link to='/'><img src='./image/TNlogo.png' className='logo' alt='ThrivNestLogo'/></Link>
@@ -31,8 +33,8 @@ function Header({ loggedIn }) {
         <li className='nav-list' onClick={handleItemClick}><Link to='/'>Home</Link></li>
         <li className='nav-list' onClick={handleItemClick}><Link to={isLogin}>Properties</Link></li>
         <li className='nav-list' onClick={handleItemClick}><Link to='/contact'>Contact</Link></li>
-        {loggedIn ? (
-          <Link to='/dashboard'><li className='nav-list' onClick={handleItemClick}>
+        {isloggedin==="true" ? (
+          <Link to={checkUser}><li className='nav-list' onClick={handleItemClick}>
           <div className="profile-container">
             <img src='./image/profile.png' className='profile-img' alt='Profile'/>
             <span className="profile-text">Profile</span>
