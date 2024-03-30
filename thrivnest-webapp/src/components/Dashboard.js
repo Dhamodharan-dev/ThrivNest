@@ -10,10 +10,9 @@ function Dashboard({ username, handleLogout, properties, handleEditProperty, han
   useEffect(() => {
     if (!isloggedin) {
       navigate('/login'); // Navigate to the login page if not logged in
-      if (checkUsername!=="admin") {
-        navigate('/dashboard'); // Navigate to the login page if not logged in
+      if (checkUsername==="admin") {
+        navigate('/admin'); // Navigate to the login page if not logged in
       }
-      navigate('/admin')
     }
   }, [isloggedin, checkUsername, navigate]);
 

@@ -16,8 +16,6 @@ function Login({ navigate, handleSubmit, message, setMessage, username, setUsern
     if (isloggedin) {
       if (checkUsername==="admin") {
         navigate('/admin');
-      } else {
-        navigate('/dashboard'); // Navigate to the login page if not logged in
       }
     }
   }, [isloggedin, checkUsername, navigate]);
