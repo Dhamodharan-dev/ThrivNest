@@ -39,11 +39,6 @@ function Main() {
         localStorage.setItem('loggedIn', true);
         localStorage.setItem('username', username);
         setMessage(response.data.message);
-        if (username==="admin") {
-          navigate('/admin')
-        }else{
-          navigate('/dashboard');
-        }
       }else{
         localStorage.setItem('loggedIn', false);
       }
@@ -51,6 +46,11 @@ function Main() {
       console.error('Error:', error);
       setMessage('An error occurred while logging in');
       localStorage.setItem('loggedIn', false);
+    }
+    if (username==="admin") {
+      navigate('/admin')
+    }else{
+      navigate('/dashboard');
     }
   }, [username, password, navigate]);
 
