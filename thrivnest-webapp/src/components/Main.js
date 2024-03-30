@@ -28,7 +28,7 @@ function Main() {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:5000/api/login', {
+      const response = await axios.post('https://thrivnest.onrender.com/api/login', {
         username,
         password,
       });
@@ -57,7 +57,7 @@ function Main() {
   useEffect(() => {
     const fetchProperties = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/property');
+        const response = await axios.get('https://thrivnest.onrender.com/api/property');
         setProperties(response.data);
       } catch (error) {
         console.error('Error fetching properties:', error);
@@ -91,7 +91,7 @@ function Main() {
 
   const handleDeleteProperty = async (propertyId) => {
     try {
-      await axios.delete(`http://localhost:5000/api/property/${propertyId}`);
+      await axios.delete(`https://thrivnest.onrender.com/api/property/${propertyId}`);
       setProperties(properties.filter(property => property._id !== propertyId));
       alert('Property deleted successfully');
     } catch (error) {

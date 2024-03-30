@@ -25,7 +25,7 @@ function PostProperty({ navigate, username }) {
             formData.append('username', username);
             formData.append('image', propertyData.image); // Append image file to form data
 
-            await axios.post('http://localhost:5000/api/property', formData, {
+            await axios.post('https://thrivnest.onrender.com/api/property', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }

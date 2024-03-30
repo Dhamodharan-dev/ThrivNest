@@ -45,7 +45,7 @@ function EditProperty({ propertyId, properties, navigate }) {
             formData.append('username', propertyData.username);
 
             // Send PUT request to update the property
-            await axios.put(`http://localhost:5000/api/property/${propertyId}`, formData, {
+            await axios.put(`https://thrivnest.onrender.com/api/property/${propertyId}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }

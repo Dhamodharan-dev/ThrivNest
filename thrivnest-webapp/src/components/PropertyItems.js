@@ -37,7 +37,7 @@ function PropertyItems({ properties, filters }) {
       {filteredProperties.length ? (
         filteredProperties.map(property => (
           <div key={property._id} className='prop-items'>
-            <div className='prop-img-div'>{property.image && <img src={`http://localhost:5000/${property.image}`} alt='Property' className='prop-img'/>}</div>
+            <div className='prop-img-div'>{property.image && <img src={`https://thrivnest.onrender.com/${property.image}`} alt='Property' className='prop-img'/>}</div>
             <div className='prop-details'>
             {property.type.length ? (<h3>Type: {property.type}</h3>) : (<h3>Type: Other</h3>)}
             {property.price !== "" ? (<p>Price: {property.price}</p>) : <p>Price: Not Available</p>}

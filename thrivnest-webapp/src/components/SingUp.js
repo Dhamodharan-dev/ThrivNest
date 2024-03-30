@@ -13,7 +13,7 @@ const Signup = ({ handleShowPassword, showPassword }) => {
     const handleSignup = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('http://localhost:5000/api/signup', { username, password });
+            await axios.post('https://thrivnest.onrender.com/api/signup', { username, password });
             alert('User created successfully');
             setUsername(''); // Clear input fields after successful signup
             setPassword('');
