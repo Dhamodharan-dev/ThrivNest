@@ -140,7 +140,6 @@ app.delete('/api/property/:id', async (req, res) => {
     // Respond with success message
     res.status(200).json({ message: 'Property deleted successfully' });
   } catch (error) {
-    // Handle errors
     console.error('Error deleting property:', error);
     res.status(500).json({ message: 'Internal server error' });
   }
