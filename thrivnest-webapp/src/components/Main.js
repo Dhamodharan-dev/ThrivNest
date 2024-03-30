@@ -38,14 +38,13 @@ function Main() {
         localStorage.setItem('token', data.token);
         localStorage.setItem('loggedIn', true);
         localStorage.setItem('username', username);
-        console.log(username);
+        setMessage(response.data.message);
         if (username==="admin") {
           navigate('/admin')
         }else{
           navigate('/dashboard');
         }
-      } else {
-        setMessage(response.data.message);
+      }else{
         localStorage.setItem('loggedIn', false);
       }
     } catch (error) {
