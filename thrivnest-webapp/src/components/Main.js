@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Home from './Home';
@@ -11,6 +11,7 @@ import Signup from './SingUp';
 import Dashboard from './Dashboard';
 import PostProperty from './PostProperty';
 import EditProperty from './EditProperty';
+import Admin from './Admin';
 
 function Main() {
   const [message, setMessage] = useState('');
@@ -22,8 +23,8 @@ function Main() {
   const [properties, setProperties] = useState([]);
   const [propertyId, setPropertyId] = useState();
   const navigate = useNavigate();
-
-  const handleSubmit = async (e) => {
+  
+  const handleSubmit = useCallback(async (e) => {
     e.preventDefault();
 
     try {
@@ -37,15 +38,22 @@ function Main() {
         localStorage.setItem('token', data.token);
         localStorage.setItem('loggedIn', true);
         localStorage.setItem('username', username);
-        navigate('/dashboard');
+        console.log(username);
+        if (username==="admin") {
+          navigate('/admin')
+        }else{
+          navigate('/dashboard');
+        }
       } else {
         setMessage(response.data.message);
+        localStorage.setItem('loggedIn', false);
       }
     } catch (error) {
       console.error('Error:', error);
       setMessage('An error occurred while logging in');
+      localStorage.setItem('loggedIn', false);
     }
-  };
+  }, [username, password, navigate]);
 
   useEffect(() => {
     const fetchProperties = async () => {
@@ -63,9 +71,7 @@ function Main() {
   useEffect(() => {
     setDisplayName(localStorage.getItem('username'));
     const storedLoggedIn = localStorage.getItem('loggedIn');
-    if (storedLoggedIn) {
-      setLoggedIn(true);
-    }
+    setLoggedIn(storedLoggedIn);
   }, [handleSubmit]);
 
   const handleLogout = () => {
@@ -106,41 +112,10 @@ function Main() {
          loggedIn={loggedIn} />} 
         />
         <Route
-          path='/properties'
-          element={<PropertySection 
-          loggedIn={loggedIn} 
-          navigate={navigate} 
-          properties={properties}/>}
-        />
-        <Route 
-          path='/contact' 
-          element={<Contact />} 
-        />
-        <Route
-          path='/dashboard'
-          element={<Dashboard 
-          loggedIn={loggedIn} 
-          username={displayName} 
-          handleLogout={handleLogout} 
-          navigate={navigate} 
-          properties={properties} 
-          handleEditProperty={handleEditProperty} 
-          handleDeleteProperty={handleDeleteProperty} />}
-        />
-        <Route 
-          path="/editproperty/:id" 
-          element={<EditProperty 
-          properties={properties} 
-          propertyId={propertyId} 
-          username={displayName} 
-          navigate={navigate} />} 
-        />
-        <Route
-          path='/postproperty'
-          element={<PostProperty 
-          loggedIn={loggedIn} 
-          navigate={navigate} 
-          username={displayName} />}
+          path='/signup'
+          element={<Signup 
+          handleShowPassword={handleShowPassword} 
+          showPassword={showPassword} />}
         />
         <Route
           path='/login'
@@ -155,13 +130,52 @@ function Main() {
           displayName={displayName} 
           setDisplayName={setDisplayName} 
           handleShowPassword={handleShowPassword} 
+          navigate={navigate} 
           showPassword={showPassword} />}
         />
         <Route
-          path='/signup'
-          element={<Signup 
-          handleShowPassword={handleShowPassword} 
-          showPassword={showPassword} />}
+          path='/properties'
+          element={<PropertySection 
+          loggedIn={loggedIn} 
+          navigate={navigate} 
+          properties={properties}/>}
+        />
+        <Route
+          path='/postproperty'
+          element={<PostProperty 
+          loggedIn={loggedIn} 
+          navigate={navigate} 
+          username={displayName} />}
+        />
+        <Route
+          path='/dashboard'
+          element={<Dashboard 
+          username={displayName} 
+          handleLogout={handleLogout} 
+          navigate={navigate} 
+          properties={properties} 
+          handleEditProperty={handleEditProperty} 
+          handleDeleteProperty={handleDeleteProperty} />}
+        />
+        <Route
+          path='/admin'
+          element={<Admin 
+          handleLogout={handleLogout} 
+          navigate={navigate} 
+          properties={properties} 
+          handleEditProperty={handleEditProperty} 
+          handleDeleteProperty={handleDeleteProperty} />}
+        />
+        <Route 
+          path="/editproperty/:id" 
+          element={<EditProperty 
+          properties={properties} 
+          propertyId={propertyId} 
+          navigate={navigate} />} 
+        />
+        <Route 
+          path='/contact' 
+          element={<Contact />} 
         />
         <Route path='*' element={<Missing />} />
       </Routes>

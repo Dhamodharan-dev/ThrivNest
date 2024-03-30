@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-function EditProperty({ propertyId, properties, username, navigate }) {
+function EditProperty({ propertyId, properties, navigate }) {
     const [propertyData, setPropertyData] = useState({
         type: '',
         price: '',
@@ -9,10 +9,11 @@ function EditProperty({ propertyId, properties, username, navigate }) {
         owner: '',
         contact: '',
         image: null,
-        username: username
+        username: ''
     });
 
     useEffect(() => {
+        const getUsername = localStorage.getItem('username');
         if (propertyId && properties.length > 0) {
             const property = properties.find(property => property._id === propertyId);
             if (property) {
@@ -23,7 +24,7 @@ function EditProperty({ propertyId, properties, username, navigate }) {
                     owner: property.owner || '',
                     contact: property.contact || '',
                     image: null, // Don't set image initially to prevent re-upload
-                    username: username
+                    username: getUsername
                 });
             } else {
                 console.error('Property not found with ID:', propertyId);

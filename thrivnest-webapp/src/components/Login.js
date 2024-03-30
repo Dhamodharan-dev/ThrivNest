@@ -2,12 +2,25 @@ import '../CSS/Login.css'
 import { Link } from 'react-router-dom'
 import { faEye, faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useEffect } from 'react';
 
-function Login({ handleSubmit, message, setMessage, username, setUsername, password, setPassword, handleShowPassword, showPassword }) {
+function Login({ navigate, handleSubmit, message, setMessage, username, setUsername, password, setPassword, handleShowPassword, showPassword }) {
 
   const handleTryAgain = () => {
     setMessage('');
   };
+
+  const isloggedin = localStorage.getItem('loggedIn')
+  const checkUsername = localStorage.getItem('username')
+  useEffect(() => {
+    if (isloggedin) {
+      if (checkUsername==="admin") {
+        navigate('/admin');
+      } else {
+        navigate('/dashboard'); // Navigate to the login page if not logged in
+      }
+    }
+  }, [isloggedin, checkUsername, navigate]);
 
   return (
     <div className='login-main'>

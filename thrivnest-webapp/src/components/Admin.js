@@ -2,20 +2,15 @@ import React, { useEffect } from 'react';
 import '../CSS/Dashboard.css';
 import { Link, useNavigate } from 'react-router-dom';
 
-function Dashboard({ username, handleLogout, properties, handleEditProperty, handleDeleteProperty }) {
+function Admin({ handleLogout, properties, handleEditProperty, handleDeleteProperty }) {
   const navigate = useNavigate(); // Use the useNavigate hook to get the navigate function
 
-  const isloggedin = localStorage.getItem('loggedIn')
-  const checkUsername = localStorage.getItem('username')
+  const username = localStorage.getItem('username')
   useEffect(() => {
-    if (!isloggedin) {
-      navigate('/login'); // Navigate to the login page if not logged in
-      if (checkUsername!=="admin") {
-        navigate('/dashboard'); // Navigate to the login page if not logged in
-      }
-      navigate('/admin')
+    if (username!=="admin") {
+      navigate('/login');
     }
-  }, [isloggedin, checkUsername, navigate]);
+  }, [username, navigate]);
 
   return (
     <div className='dashboard-page'>
@@ -31,12 +26,7 @@ function Dashboard({ username, handleLogout, properties, handleEditProperty, han
         <h1>Your Properties</h1>
         <div className='your-props'>
           <div className='prop-list'>
-            {properties.filter(property => property.username === username).length === 0 && (
-              <p className='prop-p'>No properties found.</p>
-            )}
-
             {properties.map((property) => (
-              property.username === username ? (
                 <div key={property._id} className='prop-items'>
                   <div className='prop-img-div'>
                     {property.image && 
@@ -54,7 +44,6 @@ function Dashboard({ username, handleLogout, properties, handleEditProperty, han
                     <button onClick={() => handleDeleteProperty(property._id)} className='login-submit'>Delete</button>
                   </div>
                 </div>
-              ) : null
             ))}
           </div>
         </div>
@@ -63,4 +52,4 @@ function Dashboard({ username, handleLogout, properties, handleEditProperty, han
   );
 }
 
-export default Dashboard;
+export default Admin;

@@ -13,7 +13,7 @@ const Signup = ({ handleShowPassword, showPassword }) => {
     const handleSignup = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:5000/api/signup', { username, password });
+            await axios.post('http://localhost:5000/api/signup', { username, password });
             alert('User created successfully');
             setUsername(''); // Clear input fields after successful signup
             setPassword('');
@@ -25,7 +25,7 @@ const Signup = ({ handleShowPassword, showPassword }) => {
 
     const handleTryAgain = () => {
         setMessage('');
-        setUsername(''); // Clear input fields
+        setUsername('');
         setPassword('');
     };
 

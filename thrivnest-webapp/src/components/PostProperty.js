@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import '../CSS/PostProperty.css';
 
-function PostProperty({ loggedIn, navigate, username }) {
+function PostProperty({ navigate, username }) {
     const [propertyData, setPropertyData] = useState({
         type: '',
         price: '',
@@ -12,7 +12,7 @@ function PostProperty({ loggedIn, navigate, username }) {
         image: null, // New state variable for the image file
         username: username
     });
-    
+
     const handlePostProperty = async (e) => {
         e.preventDefault();
         try {
@@ -62,91 +62,94 @@ function PostProperty({ loggedIn, navigate, username }) {
         }));
     };
 
+    const isloggedin = localStorage.getItem('loggedIn')
+    useEffect(() => {
+        if (!isloggedin) {
+            navigate('/login'); // Navigate to the login page if not logged in
+        }
+    }, [isloggedin, navigate]);
+
     return (
-        <>
-            {loggedIn ? (
-                <div className='postproperty-page'>
-                    <div className='postproperty-container'>
-                        <h1 className='post-title'>Post Property</h1>
-                        <form className='post-form' onSubmit={handlePostProperty}>
-                            <div className='post-field'>
-                                <label className='post-label'>Type</label>
-                                <select
-                                    className='post-input'
-                                    name='type'
-                                    value={propertyData.type}
-                                    onChange={handleChange}
-                                    required
-                                    >
-                                    <option>Other</option>
-                                    <option>1RK</option>
-                                    <option>1BHK</option>
-                                    <option>2BHK</option>
-                                    <option>3BHK</option>
-                                    <option>4BHK</option>
-                                </select>
-                            </div>
-                            <div className='post-field'>
-                                <label className='post-label'>Price</label>
-                                <input
-                                    type='number'
-                                    className='post-input'
-                                    name='price'
-                                    value={propertyData.price}
-                                    onChange={handleChange}
-                                    required
-                                />
-                            </div>
-                            <div className='post-field'>
-                                <label className='post-label'>Address</label>
-                                <input
-                                    type='text'
-                                    placeholder='Enter address'
-                                    className='post-input'
-                                    name='address'
-                                    value={propertyData.address}
-                                    onChange={handleChange}
-                                    required
-                                />
-                            </div>
-                            <div className='post-field'>
-                                <label className='post-label'>Owner</label>
-                                <input
-                                    type='text'
-                                    className='post-input'
-                                    name='owner'
-                                    value={propertyData.owner}
-                                    onChange={handleChange}
-                                    required
-                                />
-                            </div>
-                            <div className='post-field'>
-                                <label className='post-label'>Contact</label>
-                                <input
-                                    type='number'
-                                    className='post-input'
-                                    name='contact'
-                                    value={propertyData.contact}
-                                    onChange={handleChange}
-                                    required
-                                />
-                            </div>
-                            {/* Add image input field */}
-                            <div className='post-field'>
-                                <label className='post-label'>Image</label>
-                                <input
-                                    type='file'
-                                    accept='image/*'
-                                    onChange={handleImageChange}
-                                    required
-                                />
-                            </div>
-                            <button type='submit' className='login-submit'>Post</button>
-                        </form>
+        <div className='postproperty-page'>
+            <div className='postproperty-container'>
+                <h1 className='post-title'>Post Property</h1>
+                <form className='post-form' onSubmit={handlePostProperty}>
+                    <div className='post-field'>
+                        <label className='post-label'>Type</label>
+                        <select
+                            className='post-input'
+                            name='type'
+                            value={propertyData.type}
+                            onChange={handleChange}
+                            required
+                        >
+                            <option>Other</option>
+                            <option>1RK</option>
+                            <option>1BHK</option>
+                            <option>2BHK</option>
+                            <option>3BHK</option>
+                            <option>4BHK</option>
+                        </select>
                     </div>
-                </div>
-            ) : (navigate('/login'))}
-        </>
+                    <div className='post-field'>
+                        <label className='post-label'>Price</label>
+                        <input
+                            type='number'
+                            className='post-input'
+                            name='price'
+                            value={propertyData.price}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
+                    <div className='post-field'>
+                        <label className='post-label'>Address</label>
+                        <input
+                            type='text'
+                            placeholder='Enter address'
+                            className='post-input'
+                            name='address'
+                            value={propertyData.address}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
+                    <div className='post-field'>
+                        <label className='post-label'>Owner</label>
+                        <input
+                            type='text'
+                            className='post-input'
+                            name='owner'
+                            value={propertyData.owner}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
+                    <div className='post-field'>
+                        <label className='post-label'>Contact</label>
+                        <input
+                            type='number'
+                            className='post-input'
+                            name='contact'
+                            value={propertyData.contact}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
+                    {/* Add image input field */}
+                    <div className='post-field'>
+                        <label className='post-label'>Image</label>
+                        <input
+                            type='file'
+                            accept='image/*'
+                            onChange={handleImageChange}
+                            required
+                        />
+                    </div>
+                    <button type='submit' className='login-submit'>Post</button>
+                </form>
+            </div>
+        </div>
     );
 }
 

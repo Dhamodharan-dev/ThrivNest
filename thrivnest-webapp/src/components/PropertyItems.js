@@ -40,7 +40,7 @@ function PropertyItems({ properties, filters }) {
             <div className='prop-img-div'>{property.image && <img src={`http://localhost:5000/${property.image}`} alt='Property' className='prop-img'/>}</div>
             <div className='prop-details'>
             {property.type.length ? (<h3>Type: {property.type}</h3>) : (<h3>Type: Other</h3>)}
-            {property.price != "" ? (<p>Price: {property.price}</p>) : <p>Price: Not Available</p>}
+            {property.price !== "" ? (<p>Price: {property.price}</p>) : <p>Price: Not Available</p>}
             {property.address.length ? (<p>Address: {property.address}</p>) : <p>Address: Not Available</p>}
             {property.owner ? (<p>Owner: {property.owner}</p>) : <p>Owner: Not Available</p>}
             {property.contact ? (<p>Contact: {property.contact}</p>) : <p>Contact: Not Available</p>}
