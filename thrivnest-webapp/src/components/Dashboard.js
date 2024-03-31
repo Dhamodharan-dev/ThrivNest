@@ -31,7 +31,7 @@ function Dashboard({ username, handleLogout, properties, handleEditProperty, han
         <div className='your-props'>
           <div className='prop-list'>
             {properties.filter(property => property.username === username).length === 0 && (
-              <p className='prop-p'>No properties found.</p>
+              <img className='no-data' src='./image/nodatafound.png' alt='No data found'/>
             )}
 
             {properties.map((property) => (
