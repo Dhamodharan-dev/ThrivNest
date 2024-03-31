@@ -17,7 +17,7 @@ const port = 5000;
 // Middleware
 app.use(cors());
 app.use(express.json());
-app.use('https://github.com/Dhamodharan-dev/ThrivNest/tree/main/Server/uploads', express.static(path.join(__dirname, 'uploads'))); // Serve uploaded images statically
+app.use('/uploads', express.static(path.join(__dirname, 'uploads'))); // Serve uploaded images statically
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
