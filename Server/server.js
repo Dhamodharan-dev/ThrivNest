@@ -17,7 +17,7 @@ const port = 5000;
 // Middleware
 app.use(cors());
 app.use(express.json());
-app.use('/uploads', express.static(path.join(__dirname, 'uploads//'))); // Serve uploaded images statically
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -31,12 +31,13 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTop
 // Multer configuration for handling file uploads
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, './uploads'); // Specify destination folder for storing uploaded images
+    cb(null, path.join(__dirname, 'images')); // Specify the destination directory as 'images' in the root of your project
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + '-' + file.originalname); // Rename uploaded image files with timestamp prefix
   }
 });
+
 
 const upload = multer({ storage: storage });
 
